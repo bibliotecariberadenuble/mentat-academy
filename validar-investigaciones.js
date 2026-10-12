@@ -26,14 +26,14 @@ if(issues.length){console.error('Errores adicionales:',issues.join('\n'));proces
 const courseBank=[5,6,7,8].map(g=>bank.filter(x=>x.grade===g));
 for(let i=0;i<4;i++){
  for(let j=i+1;j<4;j++){
-  const a=new Set(courseBank[i].slice(0,20).map(x=>x.question.trim().toLowerCase()));
-  const duplicates=courseBank[j].slice(0,20).filter(x=>a.has(x.question.trim().toLowerCase()));
-  if(duplicates.length)issues.push('Preguntas repetidas en los primeros 20 casos entre cursos '+(i+5)+' y '+(j+5));
+  const a=new Set(courseBank[i].slice(0,40).map(x=>x.title.trim().toLowerCase()));
+  const duplicates=courseBank[j].slice(0,40).filter(x=>a.has(x.title.trim().toLowerCase()));
+  if(duplicates.length)issues.push('Títulos repetidos en los 40 casos entre cursos '+(i+5)+' y '+(j+5));
  }
 }
 for(const grade of [5,6,7,8]){
  const rows=bank.filter(x=>x.grade===grade);
- for(let i=0;i<20;i++){
+ for(let i=0;i<40;i++){
   if(!rows[i].title.startsWith('Expediente '+(i+1)+':'))issues.push('Orden incorrecto en '+rows[i].id);
   if(!rows[i].hint2||!rows[i].hint2.trim())issues.push('Falta segunda pista '+rows[i].id);
  }
