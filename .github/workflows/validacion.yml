@@ -1,0 +1,17 @@
+name: Validación Mentat Academy
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar investigaciones
+        run: node validar-investigaciones.js
+      - name: Validar estructura y sintaxis
+        run: node validar-aplicacion.js
