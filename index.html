@@ -131,8 +131,13 @@ const mentatExamQuestions=[
 {q:'Dos archivos históricos discrepan. ¿Cuál es el procedimiento más riguroso?',o:['Elegir el más antiguo sin leerlo','Descartar ambos','Comparar autoría, contexto y pruebas'],a:2,why:'Las fuentes deben contextualizarse y contrastarse.'},
 {q:'El Consejo tiene información incompleta y una decisión reversible. ¿Qué es prudente?',o:['Elegir una opción verificable y revisar resultados','Afirmar certeza absoluta','No considerar consecuencias'],a:0,why:'Las decisiones revisables permiten aprender de resultados.'},
 {q:'Una persona acierta una vez y afirma tener siempre razón. ¿Qué sesgo puede existir?',o:['Ninguno','Generalización apresurada','Medición exacta'],a:1,why:'Un acierto aislado no justifica una regla universal.'}
+,
+{q:'La sombra de una torre cambia durante el día. ¿Qué variable conviene registrar?',o:['El nombre del testigo','La hora y posición solar','El color del cuaderno'],a:1,why:'La posición aparente del Sol modifica las sombras.'},
+{q:'Tres objetos parecen idénticos, pero solo dos reaccionan al imán. ¿Qué demuestra?',o:['La apariencia no basta para clasificarlos','Todos son idénticos','El imán es decorativo'],a:0,why:'Una propiedad observable permite distinguir materiales.'},
+{q:'Una crónica fue escrita décadas después del acontecimiento. ¿Qué precaución corresponde?',o:['Rechazarla siempre','Aceptarla sin preguntas','Examinar fuentes y memoria del autor'],a:2,why:'La distancia temporal influye en la fiabilidad del testimonio.'},
+{q:'Un equipo debe elegir entre rapidez y seguridad. ¿Qué decisión es defendible?',o:['Evaluar riesgos y justificar prioridades','Elegir siempre lo más rápido','No registrar consecuencias'],a:0,why:'La decisión estratégica considera restricciones y riesgos.'}
 ];
-function mentatExamSet(){const grade=Number(state.course),milestone=courseProgress().done.length,offset=((grade-5)*3+(milestone/10-1)*2)%mentatExamQuestions.length;return [0,1,2].map(i=>mentatExamQuestions[(offset+i*4)%mentatExamQuestions.length])}
+function mentatExamSet(){const grade=Number(state.course),milestone=courseProgress().done.length,round=Math.max(0,Math.floor(milestone/10)-1),base=(grade-5)*4+round;return [0,1,2].map(i=>mentatExamQuestions[(base+i*5)%mentatExamQuestions.length])}
 let mentatExamStep=0,mentatExamMistakes=0;
 function mentatExamKey(){return 'mentatExams|'+state.course+'|'+(mentatAlias||'Aprendiz')}
 function mentatExams(){try{return JSON.parse(localStorage.getItem(mentatExamKey())||'{}')}catch(e){return {}}}
