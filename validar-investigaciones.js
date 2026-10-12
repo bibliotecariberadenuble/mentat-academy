@@ -18,3 +18,7 @@ for(const grade of [5,6,7,8]){
 }
 console.log('Investigaciones:',bank.length,'| Problemas estructurales:',issues.length);
 if(issues.length){console.error(issues.join('\n'));process.exitCode=1}
+
+const byGrade=[5,6,7,8].map(g=>bank.filter(x=>x.grade===g));
+for(let i=0;i<4;i++){const titles=byGrade[i].slice(0,10).map(x=>x.title.replace(/^Expediente \d+: /,''));for(let j=i+1;j<4;j++){const other=new Set(byGrade[j].slice(0,10).map(x=>x.title.replace(/^Expediente \d+: /,'')));const overlaps=titles.filter(x=>other.has(x));if(overlaps.length)issues.push('Primeros diez casos compartidos entre '+(i+5)+' y '+(j+5)+': '+overlaps.join(', '))}}
+if(issues.length){console.error('Errores adicionales:',issues.join('\n'));process.exitCode=1}
