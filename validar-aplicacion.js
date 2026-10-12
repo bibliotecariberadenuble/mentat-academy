@@ -11,5 +11,8 @@ for(const file of ['index.html','mentat-investigaciones.js'])if(!sw.includes(fil
 if(html.includes('id="mentatTopFive"')||html.includes('TOP 5 MENTAT'))errors.push('Ranking obsoleto sigue visible');
 if(!html.includes('function mentatPendingMilestone()'))errors.push('Falta migración de exámenes anteriores');
 if(!html.includes('version:2'))errors.push('Falta respaldo ampliado');
+if(!html.includes('mentatAcademyProgressV2|'))errors.push('El progreso no está separado por alias');
+if(!html.includes('mentatAcademyLegacyMigrated'))errors.push('Falta migración del progreso antiguo');
+if(!html.includes('function mentatPendingMilestone()'))errors.push('Falta recuperación de exámenes pendientes');
 console.log('Scripts examinados:',scripts.length,'| Problemas:',errors.length);
 if(errors.length){console.error(errors.join('\n'));process.exitCode=1}
